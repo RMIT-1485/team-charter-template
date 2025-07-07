@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Team Charter – MKTG1485</title>
+  <title>MKTG1485 CX Strategy Team Charter</title>
   <script src="https://cdn.jsdelivr.net/npm/docx@7.7.0/build/index.umd.min.js"></script>
   <style>
     body {
@@ -16,23 +16,23 @@
     }
     h2 {
       color: #222160;
-      margin-top: 30px;
     }
     input, textarea {
       width: 100%;
       padding: 8px;
-      margin: 6px 0 20px;
+      margin-top: 4px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0 30px;
+      margin-bottom: 24px;
     }
-    table th, table td {
+    th, td {
       border: 1px solid #ccc;
-      padding: 8px;
+      padding: 6px;
       text-align: left;
     }
     button {
@@ -43,6 +43,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      margin-top: 20px;
     }
     button:hover {
       background-color: #3c3ca0;
@@ -55,10 +56,10 @@
   <h2>Team Charter</h2>
 
   <label>1. Team Name</label>
-  <input type="text" id="teamName" placeholder="Enter your team name">
+  <input type="text" id="teamName" placeholder="Enter your team name" />
 
-  <label>2. Team Members & Contact Info</label>
-  <table>
+  <h3>2. Team Members & Contact Info</h3>
+  <table id="teamTable">
     <thead>
       <tr>
         <th>First and Last Name</th>
@@ -68,25 +69,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
-      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+      <tr>
+        <td><input placeholder="e.g. Jane Smith" /></td>
+        <td><input placeholder="e.g. s1234567" /></td>
+        <td><input placeholder="e.g. jane.smith@rmit.edu.au" /></td>
+        <td><input placeholder="e.g. Not available Thurs 4–7pm" /></td>
+      </tr>
+      <tr>
+        <td><input /></td><td><input /></td><td><input /></td><td><input /></td>
+      </tr>
+      <tr>
+        <td><input /></td><td><input /></td><td><input /></td><td><input /></td>
+      </tr>
+      <tr>
+        <td><input /></td><td><input /></td><td><input /></td><td><input /></td>
+      </tr>
+      <tr>
+        <td><input /></td><td><input /></td><td><input /></td><td><input /></td>
+      </tr>
     </tbody>
   </table>
 
   <label>3. Shared Values</label>
-  <textarea rows="3" id="teamValues" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
+  <textarea id="teamValues" rows="3" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
 
   <label>4. Communication Plan</label>
-  <textarea rows="3" id="communicationPlan" placeholder="e.g. Weekly check-ins, Teams channel, shared document"></textarea>
+  <textarea id="communicationPlan" rows="3" placeholder="e.g. Weekly check-ins, Teams channel, shared document"></textarea>
 
   <label>5. Roles & Responsibilities</label>
-  <textarea rows="4" id="teamRoles" placeholder="e.g. Research Lead, Comms Lead, Visual Design Lead, Project Manager"></textarea>
+  <textarea id="teamRoles" rows="3" placeholder="e.g. Research Lead, Comms Lead, Visual Design Lead, Project Manager"></textarea>
 
   <label>6. Conflict Management</label>
-  <textarea rows="3" id="conflictPlan" placeholder="e.g. Raise early, meet within 24 hours, involve tutor if needed"></textarea>
+  <textarea id="conflictPlan" rows="3" placeholder="e.g. Raise early, meet within 24 hours, involve tutor if needed"></textarea>
 
   <button onclick="exportToWord()">Export to Word</button>
 
@@ -94,15 +108,21 @@
     function exportToWord() {
       const { Document, Packer, Paragraph, TextRun } = window.docx;
 
-      const teamName = document.getElementById('teamName').value;
-      const values = document.getElementById('teamValues').value;
-      const comms = document.getElementById('communicationPlan').value;
-      const roles = document.getElementById('teamRoles').value;
-      const conflict = document.getElementById('conflictPlan').value;
+      const teamName = document.getElementById("teamName").value;
+      const teamValues = document.getElementById("teamValues").value;
+      const comms = document.getElementById("communicationPlan").value;
+      const roles = document.getElementById("teamRoles").value;
+      const conflict = document.getElementById("conflictPlan").value;
 
-      const tableRows = Array.from(document.querySelectorAll("tbody tr")).map(tr => {
-        const cells = Array.from(tr.querySelectorAll("input")).map(input => input.value || "");
-        return new Paragraph({ children: [new TextRun(cells.join(" | "))] });
+      const tableRows = document.querySelectorAll("#teamTable tbody tr");
+      const teamDetails = [];
+
+      tableRows.forEach(row => {
+        const inputs = row.querySelectorAll("input");
+        const rowText = Array.from(inputs).map(i => i.value.trim()).join(" | ");
+        if (rowText.replace(/\|/g, '').trim() !== '') {
+          teamDetails.push(new Paragraph(rowText));
+        }
       });
 
       const doc = new Document({
@@ -110,9 +130,9 @@
           children: [
             new Paragraph({ text: `Team Name: ${teamName}`, heading: "Heading1" }),
             new Paragraph({ text: "Team Members & Contact Info", heading: "Heading2" }),
-            ...tableRows,
+            ...teamDetails,
             new Paragraph({ text: "Shared Values", heading: "Heading2" }),
-            new Paragraph(values),
+            new Paragraph(teamValues),
             new Paragraph({ text: "Communication Plan", heading: "Heading2" }),
             new Paragraph(comms),
             new Paragraph({ text: "Roles & Responsibilities", heading: "Heading2" }),
@@ -125,13 +145,12 @@
 
       Packer.toBlob(doc).then(blob => {
         const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = `${teamName || 'team-charter'}.docx`;
-        link.click();
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${teamName || "team-charter"}.docx`;
+        a.click();
       });
     }
   </script>
-
 </body>
 </html>
