@@ -2,52 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MKTG1485 CX Strategy – Team Charter</title>
+  <title>Team Charter – MKTG1485</title>
   <script src="https://cdn.jsdelivr.net/npm/docx@7.7.0/build/index.umd.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
       padding: 40px;
       color: #222160;
+      background-color: #fff;
     }
-    h1, h2, h3 {
+    h1 {
       color: #ba372a;
     }
-    label {
-      display: block;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-    .form-section {
-      margin-bottom: 30px;
+    h2 {
+      color: #222160;
+      margin-top: 30px;
     }
     input, textarea {
       width: 100%;
       padding: 8px;
+      margin: 6px 0 20px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
+      margin: 10px 0 30px;
     }
-    th, td {
+    table th, table td {
+      border: 1px solid #ccc;
       padding: 8px;
       text-align: left;
-      border-bottom: 1px solid #ccc;
     }
     button {
-      padding: 12px 20px;
-      background-color: #ba372a;
+      background-color: #222160;
       color: white;
+      padding: 10px 20px;
       font-size: 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #3c3ca0;
     }
   </style>
 </head>
@@ -56,76 +54,39 @@
   <h1>MKTG1485 CX Strategy</h1>
   <h2>Team Charter</h2>
 
-  <div class="form-section">
-    <label for="teamName">1. Team Name</label>
-    <input type="text" id="teamName" placeholder="Enter your team name">
-  </div>
+  <label>1. Team Name</label>
+  <input type="text" id="teamName" placeholder="Enter your team name">
 
-  <div class="form-section">
-    <label>2. Team Members & Contact Info</label>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Student ID</th>
-          <th>Student Email</th>
-          <th>Additional Comments</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><input type="text" id="name1" placeholder="First Last"></td>
-          <td><input type="text" id="id1" placeholder="s1234567"></td>
-          <td><input type="email" id="email1" placeholder="student@example.com"></td>
-          <td><input type="text" id="comment1" placeholder="Unavailable Thurs 4–7pm"></td>
-        </tr>
-        <tr>
-          <td><input type="text" id="name2"></td>
-          <td><input type="text" id="id2"></td>
-          <td><input type="email" id="email2"></td>
-          <td><input type="text" id="comment2"></td>
-        </tr>
-        <tr>
-          <td><input type="text" id="name3"></td>
-          <td><input type="text" id="id3"></td>
-          <td><input type="email" id="email3"></td>
-          <td><input type="text" id="comment3"></td>
-        </tr>
-        <tr>
-          <td><input type="text" id="name4"></td>
-          <td><input type="text" id="id4"></td>
-          <td><input type="email" id="email4"></td>
-          <td><input type="text" id="comment4"></td>
-        </tr>
-        <tr>
-          <td><input type="text" id="name5"></td>
-          <td><input type="text" id="id5"></td>
-          <td><input type="email" id="email5"></td>
-          <td><input type="text" id="comment5"></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <label>2. Team Members & Contact Info</label>
+  <table>
+    <thead>
+      <tr>
+        <th>First and Last Name</th>
+        <th>Student ID</th>
+        <th>Email</th>
+        <th>Additional Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+      <tr><td><input></td><td><input></td><td><input></td><td><input></td></tr>
+    </tbody>
+  </table>
 
-  <div class="form-section">
-    <label for="teamValues">3. Shared Values</label>
-    <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Honesty, Curiosity, Reliability"></textarea>
-  </div>
+  <label>3. Shared Values</label>
+  <textarea rows="3" id="teamValues" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
 
-  <div class="form-section">
-    <label for="commPlan">4. Communication Plan</label>
-    <textarea id="commPlan" rows="4" placeholder="e.g. Teams, email, async check-ins, respectful tone"></textarea>
-  </div>
+  <label>4. Communication Plan</label>
+  <textarea rows="3" id="communicationPlan" placeholder="e.g. Weekly check-ins, Teams channel, shared document"></textarea>
 
-  <div class="form-section">
-    <label for="roles">5. Roles & Responsibilities</label>
-    <textarea id="roles" rows="4" placeholder="e.g. scheduling, research, writing, editing"></textarea>
-  </div>
+  <label>5. Roles & Responsibilities</label>
+  <textarea rows="4" id="teamRoles" placeholder="e.g. Research Lead, Comms Lead, Visual Design Lead, Project Manager"></textarea>
 
-  <div class="form-section">
-    <label for="conflict">6. Conflict Resolution</label>
-    <textarea id="conflict" rows="4" placeholder="e.g. raise issues early, ask for help, take a break"></textarea>
-  </div>
+  <label>6. Conflict Management</label>
+  <textarea rows="3" id="conflictPlan" placeholder="e.g. Raise early, meet within 24 hours, involve tutor if needed"></textarea>
 
   <button onclick="exportToWord()">Export to Word</button>
 
@@ -133,45 +94,41 @@
     function exportToWord() {
       const { Document, Packer, Paragraph, TextRun } = window.docx;
 
-      const getValue = id => document.getElementById(id)?.value || "";
-      const lines = [
-        new Paragraph({ children: [new TextRun({ text: "MKTG1485 CX Strategy", bold: true, size: 28 })] }),
-        new Paragraph({ children: [new TextRun({ text: "Team Charter", bold: true, size: 24 })] }),
-        new Paragraph(" "),
-        new Paragraph(`Team Name: ${getValue("teamName")}`),
-        new Paragraph(" "),
-        new Paragraph("Team Members & Contact Info:")
-      ];
+      const teamName = document.getElementById('teamName').value;
+      const values = document.getElementById('teamValues').value;
+      const comms = document.getElementById('communicationPlan').value;
+      const roles = document.getElementById('teamRoles').value;
+      const conflict = document.getElementById('conflictPlan').value;
 
-      for (let i = 1; i <= 5; i++) {
-        const name = getValue(`name${i}`);
-        const id = getValue(`id${i}`);
-        const email = getValue(`email${i}`);
-        const comment = getValue(`comment${i}`);
-        if (name || id || email || comment) {
-          lines.push(new Paragraph(`${name} | ${id} | ${email} | ${comment}`));
-        }
-      }
+      const tableRows = Array.from(document.querySelectorAll("tbody tr")).map(tr => {
+        const cells = Array.from(tr.querySelectorAll("input")).map(input => input.value || "");
+        return new Paragraph({ children: [new TextRun(cells.join(" | "))] });
+      });
 
-      lines.push(
-        new Paragraph(" "),
-        new Paragraph(`Shared Values: ${getValue("teamValues")}`),
-        new Paragraph(`Communication Plan: ${getValue("commPlan")}`),
-        new Paragraph(`Roles & Responsibilities: ${getValue("roles")}`),
-        new Paragraph(`Conflict Resolution: ${getValue("conflict")}`)
-      );
-
-      const doc = new Document({ sections: [{ children: lines }] });
+      const doc = new Document({
+        sections: [{
+          children: [
+            new Paragraph({ text: `Team Name: ${teamName}`, heading: "Heading1" }),
+            new Paragraph({ text: "Team Members & Contact Info", heading: "Heading2" }),
+            ...tableRows,
+            new Paragraph({ text: "Shared Values", heading: "Heading2" }),
+            new Paragraph(values),
+            new Paragraph({ text: "Communication Plan", heading: "Heading2" }),
+            new Paragraph(comms),
+            new Paragraph({ text: "Roles & Responsibilities", heading: "Heading2" }),
+            new Paragraph(roles),
+            new Paragraph({ text: "Conflict Management", heading: "Heading2" }),
+            new Paragraph(conflict),
+          ]
+        }]
+      });
 
       Packer.toBlob(doc).then(blob => {
-        const filename = `${getValue("teamName") || "Team_Charter"}.docx`;
         const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${teamName || 'team-charter'}.docx`;
+        link.click();
       });
     }
   </script>
