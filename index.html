@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MKTG1485 CX Strategy – Team Charter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MKTG1485 Team Charter</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
   <style>
     body {
@@ -12,12 +12,8 @@
       padding: 40px;
       color: #222160;
     }
-    h1, h2 {
-      color: #222160;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
+    h1, h2, h3 {
+      color: #ba372a;
     }
     .form-section {
       margin-bottom: 30px;
@@ -25,101 +21,99 @@
     label {
       font-weight: bold;
       display: block;
-      margin: 10px 0 5px;
+      margin-bottom: 6px;
     }
-    textarea, input {
+    input, textarea {
       width: 100%;
       padding: 10px;
-      font-size: 14px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      margin-bottom: 10px;
+      font-size: 14px;
     }
     button {
-      background-color: #222160;
-      color: #ffffff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 4px;
+      padding: 12px 24px;
       font-size: 16px;
+      background-color: #222160;
+      color: white;
+      border: none;
+      border-radius: 4px;
       cursor: pointer;
+      margin-top: 20px;
     }
     button:hover {
-      background-color: #1a1a4d;
+      background-color: #44448a;
     }
   </style>
 </head>
 <body>
-  <h1>MKTG1485 CX Strategy<br>Team Charter</h1>
+
+  <h1>MKTG1485 CX Strategy</h1>
+  <h2>Team Charter</h2>
 
   <div class="form-section">
-    <h2>1. Team Name</h2>
+    <label for="teamName">1. Team Name</label>
     <input type="text" id="teamName" placeholder="Enter your team name" />
   </div>
 
   <div class="form-section">
-    <h2>2. Team Members and Contact Info</h2>
-    <textarea id="teamMembers" rows="6" placeholder="Name | Student ID | Contact (email, Teams, etc)"></textarea>
+    <label for="teamMembers">2. Team Members & Contact Info</label>
+    <textarea id="teamMembers" rows="4" placeholder="Name | Student ID | Email | Teams Handle"></textarea>
   </div>
 
   <div class="form-section">
-    <h2>3. Team Values</h2>
-    <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Honesty, Curiosity, Reliability"></textarea>
+    <label for="teamValues">3. Shared Values</label>
+    <textarea id="teamValues" rows="3" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
   </div>
 
   <div class="form-section">
-    <h2>4. Communication Plan</h2>
-    <textarea id="communicationPlan" rows="4" placeholder="e.g. Weekly Teams meetings, shared OneDrive folder, group chat, etc."></textarea>
+    <label for="communication">4. Communication Plan</label>
+    <textarea id="communication" rows="3" placeholder="How and when you’ll check in, tools used, preferred tone"></textarea>
   </div>
 
   <div class="form-section">
-    <h2>5. Conflict Management</h2>
-    <textarea id="conflictPlan" rows="4" placeholder="e.g. Majority vote, speak to tutor, peer mediation..."></textarea>
+    <label for="roles">5. Roles & Responsibilities</label>
+    <textarea id="roles" rows="4" placeholder="Who will lead meetings, handle writing, research, submission, etc."></textarea>
   </div>
 
-  <div class="form-section">
-    <h2>6. Strengths & Skills</h2>
-    <textarea id="strengths" rows="4" placeholder="List any strengths, technical or personal skills across the team."></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>7. Goals and Agreements</h2>
-    <textarea id="goals" rows="4" placeholder="What do you want to achieve together? What will you each commit to?"></textarea>
-  </div>
-
-  <button onclick="generateDoc()">Export to Word</button>
+  <button onclick="exportToWord()">Export to Word</button>
 
   <script>
-    async function generateDoc() {
-      const { Document, Packer, Paragraph, TextRun } = docx;
+    async function exportToWord() {
+      const { Document, Packer, Paragraph, TextRun } = window.docx;
 
-      const getText = (id, title) => {
-        const val = document.getElementById(id).value;
-        return new Paragraph({ children: [new TextRun({ text: title, bold: true }), new TextRun("\\n" + val)] });
-      };
+      const teamName = document.getElementById("teamName").value;
+      const teamMembers = document.getElementById("teamMembers").value;
+      const teamValues = document.getElementById("teamValues").value;
+      const communication = document.getElementById("communication").value;
+      const roles = document.getElementById("roles").value;
 
       const doc = new Document({
         sections: [{
           children: [
-            new Paragraph({ children: [new TextRun({ text: "MKTG1485 CX Strategy – Team Charter", bold: true, size: 32 })] }),
-            new Paragraph(""),
-            getText("teamName", "1. Team Name"),
-            getText("teamMembers", "2. Team Members and Contact Info"),
-            getText("teamValues", "3. Team Values"),
-            getText("communicationPlan", "4. Communication Plan"),
-            getText("conflictPlan", "5. Conflict Management"),
-            getText("strengths", "6. Strengths & Skills"),
-            getText("goals", "7. Goals and Agreements")
+            new Paragraph({
+              children: [new TextRun({ text: "MKTG1485 CX Strategy Team Charter", bold: true, size: 28 })],
+            }),
+            new Paragraph({ text: "" }),
+            new Paragraph({ text: `1. Team Name:\n${teamName}` }),
+            new Paragraph({ text: "" }),
+            new Paragraph({ text: `2. Team Members & Contact Info:\n${teamMembers}` }),
+            new Paragraph({ text: "" }),
+            new Paragraph({ text: `3. Shared Values:\n${teamValues}` }),
+            new Paragraph({ text: "" }),
+            new Paragraph({ text: `4. Communication Plan:\n${communication}` }),
+            new Paragraph({ text: "" }),
+            new Paragraph({ text: `5. Roles & Responsibilities:\n${roles}` }),
           ]
         }]
       });
 
       const blob = await Packer.toBlob(doc);
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "MKTG1485_Team_Charter.docx";
-      a.click();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = teamName ? `${teamName}-TeamCharter.docx` : "TeamCharter.docx";
+      link.click();
     }
   </script>
+
 </body>
 </html>
