@@ -1,107 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>MKTG1485 CX Strategy – Team Charter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      padding: 40px;
-      color: #222160;
-    }
-    h1, h2, h3 {
-      color: #ba372a;
-    }
-    .form-section {
-      margin-bottom: 30px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      padding: 12px 20px;
-      background-color: #ba372a;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-  <h1 style="font-size: 2em; margin-bottom: 10px;">
-  <span style="color: #ba372a;">MKTG1485 CX Strategy</span><br>
-  <span style="color: #0055A0;">Team Charter</span>
-</h1>
+<script>
+  function exportToWord() {
+    const doc = new window.docx.Document({
+      sections: [{
+        children: [
+          new window.docx.Paragraph({
+            text: "MKTG1485 CX Strategy – Team Charter",
+            heading: window.docx.HeadingLevel.HEADING_1
+          }),
+          new window.docx.Paragraph({
+            text: "1. Team Members and Contact Info",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('teamMembers').value),
+          new window.docx.Paragraph({
+            text: "2. Team Values",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('teamValues').value),
+          new window.docx.Paragraph({
+            text: "3. Communication Plan",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('communicationPlan').value),
+          new window.docx.Paragraph({
+            text: "4. Conflict Resolution",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('conflictResolution').value),
+          new window.docx.Paragraph({
+            text: "5. Shared Goals",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('sharedGoals').value),
+          new window.docx.Paragraph({
+            text: "6. Roles and Responsibilities",
+            heading: window.docx.HeadingLevel.HEADING_2
+          }),
+          new window.docx.Paragraph(document.getElementById('roles').value)
+        ]
+      }]
+    });
 
-  <div class="form-section">
-    <h2>1. Team Members and Contact Info</h2>
-    <textarea id="teamMembers" rows="6" placeholder="Name | Student ID | Contact Method (email, Teams, etc.)"></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>2. Team Values</h2>
-    <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Honesty, Curiosity, Reliability"></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>3. Communication Plan</h2>
-    <textarea id="communicationPlan" rows="4" placeholder="How often will you meet? Where will you communicate? How will you track progress?"></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>4. Conflict Resolution</h2>
-    <textarea id="conflictResolution" rows="4" placeholder="Steps you’ll take if someone isn’t contributing or there's disagreement"></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>5. Shared Goals</h2>
-    <textarea id="sharedGoals" rows="4" placeholder="What outcomes do you want to achieve together?"></textarea>
-  </div>
-
-  <div class="form-section">
-    <h2>6. Roles and Responsibilities</h2>
-    <textarea id="roles" rows="5" placeholder="Who will lead, research, write, design, or review? How will roles be assigned or rotated?"></textarea>
-  </div>
-
-  <button onclick="exportToWord()">Export to Word</button>
-
-  <script>
-    function exportToWord() {
-      const doc = new docx.Document({
-        sections: [{
-          properties: {},
-          children: [
-            new docx.Paragraph({ text: "MKTG1485 CX Strategy – Team Charter", heading: docx.HeadingLevel.HEADING_1 }),
-            new docx.Paragraph({ text: "1. Team Members and Contact Info", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('teamMembers').value }),
-            new docx.Paragraph({ text: "2. Team Values", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('teamValues').value }),
-            new docx.Paragraph({ text: "3. Communication Plan", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('communicationPlan').value }),
-            new docx.Paragraph({ text: "4. Conflict Resolution", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('conflictResolution').value }),
-            new docx.Paragraph({ text: "5. Shared Goals", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('sharedGoals').value }),
-            new docx.Paragraph({ text: "6. Roles and Responsibilities", heading: docx.HeadingLevel.HEADING_2 }),
-            new docx.Paragraph({ text: document.getElementById('roles').value })
-          ]
-        }]
-      });
-
-      docx.Packer.toBlob(doc).then(blob => {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "MKTG1485_Team_Charter.docx";
-        link.click();
-      });
-    }
-  </script>
-</body>
-</html>
+    window.docx.Packer.toBlob(doc).then(blob => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "MKTG1485_Team_Charter.docx";
+      link.click();
+    });
+  }
+</script>
