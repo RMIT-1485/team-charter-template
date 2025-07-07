@@ -1,51 +1,123 @@
-<script>
-  function exportToWord() {
-    const doc = new window.docx.Document({
-      sections: [{
-        children: [
-          new window.docx.Paragraph({
-            text: "MKTG1485 CX Strategy – Team Charter",
-            heading: window.docx.HeadingLevel.HEADING_1
-          }),
-          new window.docx.Paragraph({
-            text: "1. Team Members and Contact Info",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('teamMembers').value),
-          new window.docx.Paragraph({
-            text: "2. Team Values",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('teamValues').value),
-          new window.docx.Paragraph({
-            text: "3. Communication Plan",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('communicationPlan').value),
-          new window.docx.Paragraph({
-            text: "4. Conflict Resolution",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('conflictResolution').value),
-          new window.docx.Paragraph({
-            text: "5. Shared Goals",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('sharedGoals').value),
-          new window.docx.Paragraph({
-            text: "6. Roles and Responsibilities",
-            heading: window.docx.HeadingLevel.HEADING_2
-          }),
-          new window.docx.Paragraph(document.getElementById('roles').value)
-        ]
-      }]
-    });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MKTG1485 Team Charter</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 40px;
+      color: #222160;
+    }
+    h1, h2 {
+      color: #ba372a;
+    }
+    .form-section {
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #222160;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #444b96;
+    }
+  </style>
+</head>
+<body>
+  <h1>MKTG1485 CX Strategy</h1>
+  <h2 style="color:#222160;">Team Charter</h2>
 
-    window.docx.Packer.toBlob(doc).then(blob => {
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "MKTG1485_Team_Charter.docx";
-      link.click();
-    });
-  }
-</script>
+  <div class="form-section">
+    <h3>1. Team Name</h3>
+    <input type="text" id="teamName" placeholder="Enter your team name" />
+  </div>
+
+  <div class="form-section">
+    <h3>2. Team Members & Contact Info</h3>
+    <textarea id="teamMembers" rows="6" placeholder="Name | Student ID | Email | Teams Handle"></textarea>
+  </div>
+
+  <div class="form-section">
+    <h3>3. Shared Values</h3>
+    <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
+  </div>
+
+  <div class="form-section">
+    <h3>4. Communication Plan</h3>
+    <textarea id="communication" rows="4" placeholder="How and when you’ll check in, tools used, preferred tone"></textarea>
+  </div>
+
+  <div class="form-section">
+    <h3>5. Roles & Responsibilities</h3>
+    <textarea id="roles" rows="4" placeholder="Research, analysis, editing, presentation, etc."></textarea>
+  </div>
+
+  <div class="form-section">
+    <h3>6. Accountability Plan</h3>
+    <textarea id="accountability" rows="4" placeholder="What happens if someone doesn’t follow through?"></textarea>
+  </div>
+
+  <button onclick="exportToWord()">Export to Word</button>
+
+  <script>
+    function exportToWord() {
+      const { Document, Packer, Paragraph, TextRun } = window.docx;
+
+      const teamName = document.getElementById('teamName').value;
+      const teamMembers = document.getElementById('teamMembers').value;
+      const teamValues = document.getElementById('teamValues').value;
+      const communication = document.getElementById('communication').value;
+      const roles = document.getElementById('roles').value;
+      const accountability = document.getElementById('accountability').value;
+
+      const doc = new Document({
+        sections: [{
+          properties: {},
+          children: [
+            new Paragraph({ text: "MKTG1485 Team Charter", heading: "Heading1" }),
+            new Paragraph({ text: `Team Name: ${teamName}`, spacing: { after: 200 } }),
+            new Paragraph({ text: "Team Members & Contact Info", heading: "Heading2" }),
+            new Paragraph({ text: teamMembers }),
+            new Paragraph({ text: "Shared Values", heading: "Heading2" }),
+            new Paragraph({ text: teamValues }),
+            new Paragraph({ text: "Communication Plan", heading: "Heading2" }),
+            new Paragraph({ text: communication }),
+            new Paragraph({ text: "Roles & Responsibilities", heading: "Heading2" }),
+            new Paragraph({ text: roles }),
+            new Paragraph({ text: "Accountability Plan", heading: "Heading2" }),
+            new Paragraph({ text: accountability }),
+          ]
+        }]
+      });
+
+      Packer.toBlob(doc).then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "MKTG1485_Team_Charter.docx";
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
+    }
+  </script>
+</body>
+</html>
