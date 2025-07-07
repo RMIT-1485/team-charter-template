@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MKTG1485 Team Charter</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MKTG1485 CX Strategy – Team Charter</title>
+  <script src="https://cdn.jsdelivr.net/npm/docx@7.7.0/build/index.umd.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,33 +15,39 @@
     h1, h2, h3 {
       color: #ba372a;
     }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 20px;
+    }
     .form-section {
       margin-bottom: 30px;
     }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
     input, textarea {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
     }
     button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #222160;
+      padding: 12px 20px;
+      background-color: #ba372a;
       color: white;
+      font-size: 16px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
       margin-top: 20px;
-    }
-    button:hover {
-      background-color: #44448a;
     }
   </style>
 </head>
@@ -52,66 +58,121 @@
 
   <div class="form-section">
     <label for="teamName">1. Team Name</label>
-    <input type="text" id="teamName" placeholder="Enter your team name" />
+    <input type="text" id="teamName" placeholder="Enter your team name">
   </div>
 
   <div class="form-section">
-    <label for="teamMembers">2. Team Members & Contact Info</label>
-    <textarea id="teamMembers" rows="4" placeholder="Name | Student ID | Email | Teams Handle"></textarea>
+    <label>2. Team Members & Contact Info</label>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Student ID</th>
+          <th>Student Email</th>
+          <th>Additional Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" id="name1" placeholder="First Last"></td>
+          <td><input type="text" id="id1" placeholder="s1234567"></td>
+          <td><input type="email" id="email1" placeholder="student@example.com"></td>
+          <td><input type="text" id="comment1" placeholder="Unavailable Thurs 4–7pm"></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="name2"></td>
+          <td><input type="text" id="id2"></td>
+          <td><input type="email" id="email2"></td>
+          <td><input type="text" id="comment2"></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="name3"></td>
+          <td><input type="text" id="id3"></td>
+          <td><input type="email" id="email3"></td>
+          <td><input type="text" id="comment3"></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="name4"></td>
+          <td><input type="text" id="id4"></td>
+          <td><input type="email" id="email4"></td>
+          <td><input type="text" id="comment4"></td>
+        </tr>
+        <tr>
+          <td><input type="text" id="name5"></td>
+          <td><input type="text" id="id5"></td>
+          <td><input type="email" id="email5"></td>
+          <td><input type="text" id="comment5"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="form-section">
     <label for="teamValues">3. Shared Values</label>
-    <textarea id="teamValues" rows="3" placeholder="e.g. Respect, Curiosity, Reliability, Honesty"></textarea>
+    <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Honesty, Curiosity, Reliability"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="communication">4. Communication Plan</label>
-    <textarea id="communication" rows="3" placeholder="How and when you’ll check in, tools used, preferred tone"></textarea>
+    <label for="commPlan">4. Communication Plan</label>
+    <textarea id="commPlan" rows="4" placeholder="e.g. Teams, email, async check-ins, respectful tone"></textarea>
   </div>
 
   <div class="form-section">
     <label for="roles">5. Roles & Responsibilities</label>
-    <textarea id="roles" rows="4" placeholder="Who will lead meetings, handle writing, research, submission, etc."></textarea>
+    <textarea id="roles" rows="4" placeholder="e.g. scheduling, research, writing, editing"></textarea>
+  </div>
+
+  <div class="form-section">
+    <label for="conflict">6. Conflict Resolution</label>
+    <textarea id="conflict" rows="4" placeholder="e.g. raise issues early, ask for help, take a break"></textarea>
   </div>
 
   <button onclick="exportToWord()">Export to Word</button>
 
   <script>
-    async function exportToWord() {
+    function exportToWord() {
       const { Document, Packer, Paragraph, TextRun } = window.docx;
 
-      const teamName = document.getElementById("teamName").value;
-      const teamMembers = document.getElementById("teamMembers").value;
-      const teamValues = document.getElementById("teamValues").value;
-      const communication = document.getElementById("communication").value;
-      const roles = document.getElementById("roles").value;
+      const getValue = id => document.getElementById(id)?.value || "";
+      const lines = [
+        new Paragraph({ children: [new TextRun({ text: "MKTG1485 CX Strategy", bold: true, size: 28 })] }),
+        new Paragraph({ children: [new TextRun({ text: "Team Charter", bold: true, size: 24 })] }),
+        new Paragraph(" "),
+        new Paragraph(`Team Name: ${getValue("teamName")}`),
+        new Paragraph(" "),
+        new Paragraph("Team Members & Contact Info:")
+      ];
 
-      const doc = new Document({
-        sections: [{
-          children: [
-            new Paragraph({
-              children: [new TextRun({ text: "MKTG1485 CX Strategy Team Charter", bold: true, size: 28 })],
-            }),
-            new Paragraph({ text: "" }),
-            new Paragraph({ text: `1. Team Name:\n${teamName}` }),
-            new Paragraph({ text: "" }),
-            new Paragraph({ text: `2. Team Members & Contact Info:\n${teamMembers}` }),
-            new Paragraph({ text: "" }),
-            new Paragraph({ text: `3. Shared Values:\n${teamValues}` }),
-            new Paragraph({ text: "" }),
-            new Paragraph({ text: `4. Communication Plan:\n${communication}` }),
-            new Paragraph({ text: "" }),
-            new Paragraph({ text: `5. Roles & Responsibilities:\n${roles}` }),
-          ]
-        }]
+      for (let i = 1; i <= 5; i++) {
+        const name = getValue(`name${i}`);
+        const id = getValue(`id${i}`);
+        const email = getValue(`email${i}`);
+        const comment = getValue(`comment${i}`);
+        if (name || id || email || comment) {
+          lines.push(new Paragraph(`${name} | ${id} | ${email} | ${comment}`));
+        }
+      }
+
+      lines.push(
+        new Paragraph(" "),
+        new Paragraph(`Shared Values: ${getValue("teamValues")}`),
+        new Paragraph(`Communication Plan: ${getValue("commPlan")}`),
+        new Paragraph(`Roles & Responsibilities: ${getValue("roles")}`),
+        new Paragraph(`Conflict Resolution: ${getValue("conflict")}`)
+      );
+
+      const doc = new Document({ sections: [{ children: lines }] });
+
+      Packer.toBlob(doc).then(blob => {
+        const filename = `${getValue("teamName") || "Team_Charter"}.docx`;
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
       });
-
-      const blob = await Packer.toBlob(doc);
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = teamName ? `${teamName}-TeamCharter.docx` : "TeamCharter.docx";
-      link.click();
     }
   </script>
 
