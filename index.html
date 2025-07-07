@@ -1,75 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>RMIT MKTG1485 Team Charter Form</title>
+  <meta charset="UTF-8" />
+  <title>MKTG1485 CX Strategy – Team Charter</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background-color: #fff; padding: 40px; color: #222160; }
-    h1, h2, h3 { color: #ba372a; }
-    .rmit-header { display: flex; align-items: center; gap: 20px; }
-    .form-section { margin-bottom: 30px; }
-    label { display: block; font-weight: bold; margin: 10px 0 5px; }
-    input, textarea {
-      width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      padding: 40px;
+      color: #222160;
     }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-    th, td {
-      border: 1px solid #ccc; padding: 8px; text-align: left;
+    h1, h2, h3 {
+      color: #ba372a;
+    }
+    .form-section {
+      margin-bottom: 30px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
     button {
-      padding: 12px 20px; background-color: #ba372a; color: white; font-size: 16px;
-      border: none; border-radius: 4px; cursor: pointer;
+      padding: 12px 20px;
+      background-color: #ba372a;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="rmit-header">
-    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/RMIT_University_Logo.svg/1280px-RMIT_University_Logo.svg.png" alt="RMIT Logo" width="120">
-    <h1>MKTG1485 Team Charter</h1>
-  </div>
+  <h1 style="color: #ba372a; font-size: 2em;">MKTG1485 CX Strategy<br>Team Charter</h1>
 
   <div class="form-section">
-    <label for="teamName">1. Team Name</label>
-    <input id="teamName" placeholder="e.g. Team Insight, CX Crew, Team Empathy">
-  </div>
-
-  <div class="form-section">
-    <label for="teamMembers">2. Team Members and Contact Info</label>
+    <h2>1. Team Members and Contact Info</h2>
     <textarea id="teamMembers" rows="6" placeholder="Name | Student ID | Contact Method (email, Teams, etc.)"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="teamValues">3. Team Values</label>
+    <h2>2. Team Values</h2>
     <textarea id="teamValues" rows="4" placeholder="e.g. Respect, Honesty, Curiosity, Reliability"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="commPlan">4. Communication Plan</label>
-    <textarea id="commPlan" rows="4" placeholder="How will you communicate and check in weekly? Response times? Tools?"></textarea>
+    <h2>3. Communication Plan</h2>
+    <textarea id="communicationPlan" rows="4" placeholder="How often will you meet? Where will you communicate? How will you track progress?"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="roles">5. Roles and Responsibilities</label>
-    <textarea id="roles" rows="5" placeholder="Who will coordinate, research, design, write, etc.?"></textarea>
+    <h2>4. Conflict Resolution</h2>
+    <textarea id="conflictResolution" rows="4" placeholder="Steps you’ll take if someone isn’t contributing or there's disagreement"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="decisionMaking">6. Decision-Making</label>
-    <textarea id="decisionMaking" rows="3" placeholder="Consensus? Majority vote? Rotating lead?"></textarea>
+    <h2>5. Shared Goals</h2>
+    <textarea id="sharedGoals" rows="4" placeholder="What outcomes do you want to achieve together?"></textarea>
   </div>
 
   <div class="form-section">
-    <label for="conflict">7. Conflict Resolution</label>
-    <textarea id="conflict" rows="3" placeholder="How will you raise concerns, resolve disagreements, or escalate if needed?"></textarea>
+    <h2>6. Roles and Responsibilities</h2>
+    <textarea id="roles" rows="5" placeholder="Who will lead, research, write, design, or review? How will roles be assigned or rotated?"></textarea>
   </div>
 
-  <div class="form-section">
-    <label for="signatures">8. Signatures and Commitment</label>
-    <textarea id="signatures" rows="5" placeholder="Names and acknowledgement of agreement to the above. (Typed signatures)"></textarea>
-  </div>
-
-  <button onclick="exportToWord()">Export as Word Document</button>
+  <button onclick="exportToWord()">Export to Word</button>
 
   <script>
     function exportToWord() {
@@ -77,24 +75,28 @@
         sections: [{
           properties: {},
           children: [
-            new docx.Paragraph({ text: "MKTG1485 Team Charter", heading: docx.HeadingLevel.HEADING_1 }),
-            ...["Team Name", "Team Members", "Team Values", "Communication Plan", "Roles", "Decision-Making", "Conflict Resolution", "Signatures"]
-              .map((label, i) => [
-                new docx.Paragraph({ text: `${i + 1}. ${label}`, heading: docx.HeadingLevel.HEADING_2 }),
-                new docx.Paragraph({ text: document.getElementById(
-                  ['teamName','teamMembers','teamValues','commPlan','roles','decisionMaking','conflict','signatures'][i]
-                ).value || "", spacing: { after: 200 } })
-              ])
-              .flat()
+            new docx.Paragraph({ text: "MKTG1485 CX Strategy – Team Charter", heading: docx.HeadingLevel.HEADING_1 }),
+            new docx.Paragraph({ text: "1. Team Members and Contact Info", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('teamMembers').value }),
+            new docx.Paragraph({ text: "2. Team Values", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('teamValues').value }),
+            new docx.Paragraph({ text: "3. Communication Plan", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('communicationPlan').value }),
+            new docx.Paragraph({ text: "4. Conflict Resolution", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('conflictResolution').value }),
+            new docx.Paragraph({ text: "5. Shared Goals", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('sharedGoals').value }),
+            new docx.Paragraph({ text: "6. Roles and Responsibilities", heading: docx.HeadingLevel.HEADING_2 }),
+            new docx.Paragraph({ text: document.getElementById('roles').value })
           ]
         }]
       });
 
       docx.Packer.toBlob(doc).then(blob => {
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "MKTG1485_Team_Charter.docx";
-        a.click();
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "MKTG1485_Team_Charter.docx";
+        link.click();
       });
     }
   </script>
